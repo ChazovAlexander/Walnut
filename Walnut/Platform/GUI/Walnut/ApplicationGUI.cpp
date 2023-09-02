@@ -400,6 +400,11 @@ namespace Walnut {
 
 #include "Walnut/Embed/Walnut-Icon.embed"
 #include "Walnut/Embed/WindowImages.embed"
+#include "Walnut/Embed/Potato.embed"
+#include "Walnut/Embed/Burger.embed"
+#include "Walnut/Embed/Sandwich.embed"
+#include "Walnut/Embed/HotDog.embed"
+#include "Walnut/Embed/Cards-icons.embed"
 
 	Application::Application(const ApplicationSpecification& specification)
 		: m_Specification(specification)
@@ -597,7 +602,7 @@ namespace Walnut {
 			ImGui_ImplVulkan_DestroyFontUploadObjects();
 		}
 
-		// Load images
+		// Load basic images
 		{
 			uint32_t w, h;
 			void* data = Image::Decode(g_WalnutIcon, sizeof(g_WalnutIcon), w, h);
@@ -626,6 +631,50 @@ namespace Walnut {
 			uint32_t w, h;
 			void* data = Image::Decode(g_WindowCloseIcon, sizeof(g_WindowCloseIcon), w, h);
 			m_IconClose = std::make_shared<Walnut::Image>(w, h, ImageFormat::RGBA, data);
+			free(data);
+		}
+		//Cards icons
+		{
+			uint32_t w, h;
+			void* data = Image::Decode(g_Visa, sizeof(g_Visa), w, h);
+			m_AppVisa_card = std::make_shared<Walnut::Image>(w, h, ImageFormat::RGBA, data);
+			free(data);
+		}
+		{
+			uint32_t w, h;
+			void* data = Image::Decode(g_MasterCard, sizeof(g_MasterCard), w, h);
+			m_AppMastercard = std::make_shared<Walnut::Image>(w, h, ImageFormat::RGBA, data);
+			free(data);
+		}
+		{
+			uint32_t w, h;
+			void* data = Image::Decode(g_AmericanExpress, sizeof(g_AmericanExpress), w, h);
+			m_AppAmericanExpress = std::make_shared<Walnut::Image>(w, h, ImageFormat::RGBA, data);
+			free(data);
+		}
+		// Load Images
+		{
+			uint32_t w, h;
+			void* data = Image::Decode(g_WalnutAmerican_Burger, sizeof(g_WalnutAmerican_Burger), w, h);
+			m_AppAmerican_Burger = std::make_shared<Walnut::Image>(w, h, ImageFormat::RGBA, data);
+			free(data);
+		}
+		{
+			uint32_t w, h;
+			void* data = Image::Decode(g_WalnutAmerican_Potato, sizeof(g_WalnutAmerican_Potato), w, h);
+			m_AppAmerican_Potato = std::make_shared<Walnut::Image>(w, h, ImageFormat::RGBA, data);
+			free(data);
+		}
+		{
+			uint32_t w, h;
+			void* data = Image::Decode(g_WalnutAmerican_HotDog, sizeof(g_WalnutAmerican_HotDog), w, h);
+			m_AppAmerican_HotDog = std::make_shared<Walnut::Image>(w, h, ImageFormat::RGBA, data);
+			free(data);
+		}
+		{
+			uint32_t w, h;
+			void* data = Image::Decode(g_WalnutAmerican_Sandwich, sizeof(g_WalnutAmerican_Sandwich), w, h);
+			m_AppAmerican_Sandwich = std::make_shared<Walnut::Image>(w, h, ImageFormat::RGBA, data);
 			free(data);
 		}
 
