@@ -63,13 +63,16 @@ namespace Walnut {
 
 		bool IsMaximized() const;
 		std::shared_ptr<Image> GetApplicationIcon() const { return m_AppHeaderIcon; }
+		std::shared_ptr<Image> GetIconClose() const { return m_IconClose; }
+
 		std::shared_ptr<Image> GetVisa_card() const { return m_AppVisa_card; }
 		std::shared_ptr<Image> GetMastercard() const { return m_AppMastercard; }
 		std::shared_ptr<Image> GetAmericanExpress() const { return m_AppAmericanExpress; }
-		std::shared_ptr<Image> GetAmerican_Burger() const { return m_AppAmerican_Burger; }
-		std::shared_ptr<Image> GetAmerican_Potato() const { return m_AppAmerican_Potato; }
-		std::shared_ptr<Image> GetAmerican_HotDog() const { return m_AppAmerican_HotDog; }
-		std::shared_ptr<Image> GetAmerican_Sandwich() const { return m_AppAmerican_Sandwich; }
+
+		std::vector < std::shared_ptr<Image>> GetAmerican_Burgers() const { return m_AppImages; }
+
+		void AddImageToVector(const void* imageData, size_t imageSize, std::shared_ptr<Walnut::Image>& image);
+		
 
 		float GetTime();
 		GLFWwindow* GetWindowHandle() const { return m_WindowHandle; }
@@ -122,10 +125,10 @@ namespace Walnut {
 		std::shared_ptr<Walnut::Image> m_AppAmericanExpress;
 		std::shared_ptr<Walnut::Image> m_AppVisa_card;
 		std::shared_ptr<Walnut::Image> m_AppMastercard;
-		std::shared_ptr<Walnut::Image> m_AppAmerican_Burger;
-		std::shared_ptr<Walnut::Image> m_AppAmerican_Potato;
-		std::shared_ptr<Walnut::Image> m_AppAmerican_HotDog;
-		std::shared_ptr<Walnut::Image> m_AppAmerican_Sandwich;
+
+		std::vector<std::shared_ptr<Walnut::Image>> m_AppImages;
+		
+
 		std::shared_ptr<Walnut::Image> m_IconClose;
 		std::shared_ptr<Walnut::Image> m_IconMinimize;
 		std::shared_ptr<Walnut::Image> m_IconMaximize;

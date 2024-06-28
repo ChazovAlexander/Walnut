@@ -400,11 +400,27 @@ namespace Walnut {
 
 #include "Walnut/Embed/Walnut-Icon.embed"
 #include "Walnut/Embed/WindowImages.embed"
-#include "Walnut/Embed/Potato.embed"
-#include "Walnut/Embed/Burger.embed"
-#include "Walnut/Embed/Sandwich.embed"
-#include "Walnut/Embed/HotDog.embed"
 #include "Walnut/Embed/Cards-icons.embed"
+
+#include "Walnut/Embed/American/Potato.embed"
+#include "Walnut/Embed/American/Burger.embed"
+#include "Walnut/Embed/American/Sandwich.embed"
+#include "Walnut/Embed/American/HotDog.embed"
+
+#include "Walnut/Embed/Asian/CaliforniaRoll.embed"
+#include "Walnut/Embed/Asian/UnagiRoll.embed"
+#include "Walnut/Embed/Asian/Nigiri.embed"
+#include "Walnut/Embed/Asian/Maki.embed"
+
+#include "Walnut/Embed/European/Minestrone.embed"
+#include "Walnut/Embed/European/Lentil.embed"
+#include "Walnut/Embed/European/Chicken.embed"
+#include "Walnut/Embed/European/Onion.embed"
+
+#include "Walnut/Embed/Italian/Fettuccine.embed"
+#include "Walnut/Embed/Italian/Gnocchi.embed"
+#include "Walnut/Embed/Italian/Lasagne.embed"
+#include "Walnut/Embed/Italian/Margherita.embed"
 
 	Application::Application(const ApplicationSpecification& specification)
 		: m_Specification(specification)
@@ -425,7 +441,7 @@ namespace Walnut {
 	{
 		return *s_Instance;
 	}
-
+	
 	void Application::Init()
 	{
 		// Intialize logging
@@ -652,33 +668,42 @@ namespace Walnut {
 			m_AppAmericanExpress = std::make_shared<Walnut::Image>(w, h, ImageFormat::RGBA, data);
 			free(data);
 		}
-		// Load Images
-		{
-			uint32_t w, h;
-			void* data = Image::Decode(g_WalnutAmerican_Burger, sizeof(g_WalnutAmerican_Burger), w, h);
-			m_AppAmerican_Burger = std::make_shared<Walnut::Image>(w, h, ImageFormat::RGBA, data);
-			free(data);
-		}
-		{
-			uint32_t w, h;
-			void* data = Image::Decode(g_WalnutAmerican_Potato, sizeof(g_WalnutAmerican_Potato), w, h);
-			m_AppAmerican_Potato = std::make_shared<Walnut::Image>(w, h, ImageFormat::RGBA, data);
-			free(data);
-		}
-		{
-			uint32_t w, h;
-			void* data = Image::Decode(g_WalnutAmerican_HotDog, sizeof(g_WalnutAmerican_HotDog), w, h);
-			m_AppAmerican_HotDog = std::make_shared<Walnut::Image>(w, h, ImageFormat::RGBA, data);
-			free(data);
-		}
-		{
-			uint32_t w, h;
-			void* data = Image::Decode(g_WalnutAmerican_Sandwich, sizeof(g_WalnutAmerican_Sandwich), w, h);
-			m_AppAmerican_Sandwich = std::make_shared<Walnut::Image>(w, h, ImageFormat::RGBA, data);
-			free(data);
-		}
+		//Array
 
+		// American Images
+		/*AddImageToVector(g_WalnutAmerican_Burger, sizeof(g_WalnutAmerican_Burger), m_AppImages);
+		AddImageToVector(g_WalnutAmerican_Potato, sizeof(g_WalnutAmerican_Potato), m_AppImages);
+		AddImageToVector(g_WalnutAmerican_HotDog, sizeof(g_WalnutAmerican_HotDog), m_AppImages);
+		AddImageToVector(g_WalnutAmerican_Sandwich, sizeof(g_WalnutAmerican_Sandwich), m_AppImages);*/
+
+		// Asian Images
+		/*AddImageToVector(g_CaliforniaRoll, sizeof(g_CaliforniaRoll), m_AppImages);
+		AddImageToVector(g_UnagiRoll, sizeof(g_UnagiRoll), m_AppImages);
+		AddImageToVector(g_Nigiri, sizeof(g_Nigiri), m_AppImages);
+		AddImageToVector(g_Maki, sizeof(g_Maki), m_AppImages);*/
+
+		// European Images
+		/*AddImageToVector(g_Minestrone, sizeof(g_Minestrone), m_AppImages);
+		AddImageToVector(g_Lentil, sizeof(g_Lentil), m_AppImages);
+		AddImageToVector(g_Chicken, sizeof(g_Chicken), m_AppImages);
+		AddImageToVector(g_Onion, sizeof(g_Onion), m_AppImages);*/
+
+		// Italian Images
+		/*AddImageToVector(g_Margherita, sizeof(g_Margherita), m_AppImages);
+		AddImageToVector(g_Lasagne, sizeof(g_Lasagne), m_AppImages);
+		AddImageToVector(g_Gnocchi, sizeof(g_Gnocchi), m_AppImages);
+		AddImageToVector(g_Fettuccine, sizeof(g_Fettuccine), m_AppImages);*/
+		
 	}
+	void Application::AddImageToVector(const void* imageData, size_t imageSize, std::shared_ptr<Walnut::Image>& image) {
+		uint32_t w, h;
+		void* data = Image::Decode(imageData, imageSize, w, h);
+		image = std::make_shared<Walnut::Image>(w, h, ImageFormat::RGBA, data);
+		free(data);
+	}
+	/*void Application::LoadImages() {
+		
+	}*/
 
 	void Application::Shutdown()
 	{
@@ -695,6 +720,10 @@ namespace Walnut {
 		m_IconMinimize.reset();
 		m_IconMaximize.reset();
 		m_IconRestore.reset();
+		m_AppVisa_card.reset();
+		m_AppMastercard.reset();
+		m_AppAmericanExpress.reset();
+
 
 		// Cleanup
 		VkResult err = vkDeviceWaitIdle(g_Device);
